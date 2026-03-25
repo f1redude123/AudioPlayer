@@ -131,6 +131,7 @@
             	i.pause();
                 i.currentTime = 0;
             }
+			document.getElementById("track").textContent = name;
         	document.getElementById("playPause").firstChild.textContent = "pause";
         	currentTrack = files.get(name);
             currentTrack.play();
