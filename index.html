@@ -106,6 +106,7 @@
     <body>
     	<div class="box">
             <div class="boxChild">
+            	<button class="play" onclick="filterABC();"><i class="material-icons">filter_list</i></button>
             	<div id="list"></div>
             	<label for="fUpload">+ Add files</label>
                 <input type="file" onchange="addFiles(this.files);" accept=".mp3,.mpeg,.ogg,.wav" style="display:none;" id="fUpload" multiple>
@@ -126,6 +127,13 @@
         var currentTrack;
         var currentTarg = 0;
         
+        document.onkeydown = function(e) {
+        	if (e.key == "ArrowLeft")
+            	currentTrack.currentTime -= 5;
+            else if (e.key == "ArrowRight")
+            	currentTrack.currentTime += 5;
+        };
+        
         function setTrack(name) {
         	for (var i of document.querySelectorAll("audio")) {
             	i.pause();
@@ -138,7 +146,7 @@
             document.getElementById("slider").max = currentTrack.duration;
             clearInterval(currentTarg);
             currentTarg = setInterval(function() {
-                document.getElementById("slider").value = currentTrack.currentTime+1;
+                document.getElementById("slider").value = currentTrack.currentTime;
                 if (currentTrack.currentTime == currentTrack.duration) {
                 	document.getElementById("playPause").firstChild.textContent = "play_arrow";
                 	clearInterval(currentTarg);
@@ -160,9 +168,17 @@
         	if (!currentTrack.paused) {
             	currentTrack.pause();
             } else {
-            	currentTrack.play();
+            	if (currentTrack.currentTime == currentTrack.duration)
+                	setTrack(files.get(Array.from(files.keys())[Array.from(files.values()).indexOf(currentTrack)]));
+                else
+                	currentTrack.play();
             }
             document.getElementById("playPause").firstChild.textContent = currentTrack.paused ? "play_arrow" : "pause";
+        }
+        
+        function filterABC() {
+        	files = new Map(Array.from(files).toSorted());
+            refreshFiles();
         }
         
     	function refreshFiles() {
