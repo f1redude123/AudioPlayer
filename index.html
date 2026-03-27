@@ -42,6 +42,7 @@
                 flex-direction:row;
                 flex:1;
                 align-items:center;
+				border-bottom:1px solid #555;
             }
             .lItem {
             	padding:5px;
@@ -132,9 +133,8 @@
             	skipPrev();
             else if (e.key == "ArrowRight")
             	skipNext();
-			else if (e.key == " ") {
+			else if (e.key == " ")
 				playPause();
-			}
         };
         
         function setTrack(name) {
