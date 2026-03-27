@@ -138,7 +138,7 @@
         };
         
         function setTrack(name) {
-        	for (var i of document.querySelectorAll("audio")) {
+        	for (var i of files.values()) {
             	i.pause();
                 i.currentTime = 0;
             }
