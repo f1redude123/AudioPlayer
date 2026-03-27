@@ -129,9 +129,12 @@
         
         document.onkeydown = function(e) {
         	if (e.key == "ArrowLeft")
-            	currentTrack.currentTime -= 5;
+            	skipPrev();
             else if (e.key == "ArrowRight")
-            	currentTrack.currentTime += 5;
+            	skipNext();
+			else if (e.key == " ") {
+				playPause();
+			}
         };
         
         function setTrack(name) {
