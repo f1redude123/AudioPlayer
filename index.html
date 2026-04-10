@@ -172,7 +172,7 @@
             	currentTrack.pause();
             } else {
             	if (currentTrack.currentTime == currentTrack.duration)
-                	setTrack(files.get(Array.from(files.keys())[Array.from(files.values()).indexOf(currentTrack)]));
+                	setTrack(Array.from(files.keys())[Array.from(files.values()).indexOf(currentTrack)]);
                 else
                 	currentTrack.play();
             }
