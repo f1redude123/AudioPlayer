@@ -169,8 +169,16 @@
         
         function playPause() {
         	if (!currentTrack.paused) {
+				clearInterval(currentTarg);
             	currentTrack.pause();
             } else {
+				currentTarg = setInterval(function() {
+	                document.getElementById("slider").value = currentTrack.currentTime;
+	                if (currentTrack.currentTime == currentTrack.duration) {
+	                	document.getElementById("playPause").firstChild.textContent = "play_arrow";
+	                	clearInterval(currentTarg);
+	                }
+	            }, 10);
             	if (currentTrack.currentTime == currentTrack.duration)
                 	setTrack(Array.from(files.keys())[Array.from(files.values()).indexOf(currentTrack)]);
                 else
