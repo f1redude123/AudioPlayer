@@ -102,6 +102,13 @@
                 cursor: pointer;
                 border-radius:50%;
             }
+            .same {
+            	display:flex;
+                flex-direction:row;
+                width:100%;
+                justify-content:center;
+                align-items:center;
+            }
         </style>
     </head>
     <body>
@@ -118,11 +125,20 @@
                 <button id="playPause" class="control" onclick="playPause();"><i class="material-icons">play_arrow</i></button>
                 <button class="control" onclick="skipNext();"><i class="material-icons">skip_next</i></button>
                 <br>
-                <input id="slider" type="range" class="slider" min="0" max="0" value="0" step="0.000001" oninput="currentTrack.currentTime = this.value;">
+                <div class="same">
+                    <p id="currentTime"></p>&nbsp;
+                    <input id="slider" type="range" class="slider" min="0" max="0" value="0" step="0.000001" oninput="currentTrack.currentTime = this.value;">&nbsp;
+                    <p id="duration"></p>
+                </div>
             </div>
         </div>
     </body>
     <script>
+    	setInterval(function() {
+        	document.getElementById("duration").textContent = Math.round(currentTrack.duration) + ":00";
+            document.getElementById("currentTime").textContent = Math.round(currentTrack.currentTime) + ":00";
+        }, 10);
+        
     	files = new Map();
         
         var currentTrack;
